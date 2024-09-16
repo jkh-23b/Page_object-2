@@ -16,3 +16,11 @@ class ProductPage(BasePage):
         price_in_basket = self.driver.find_element(*ProductPageLocators.PRICE_IN_BASKET).text
         assert book_price == price_in_basket, "Price of choosen book is not found"
 
+    def should_not_be_success_message(self):
+        assert self.is_not_element_present(*ProductPageLocators.NAME_OF_BOOK_IN_BASKET),\
+        "Success message is presented, but should not be"
+
+    def should_disapper_button(self):
+        assert self.is_disappeared(*ProductPageLocators.NAME_OF_BOOK_IN_BASKET),\
+        "Success message is not disappeared"
+

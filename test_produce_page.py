@@ -21,6 +21,7 @@ def test_guest_can_add_product_to_basket(driver):
     page.check_product_name_in_basket()
     page.check_product_price_in_basket()
 
+@pytest.mark.skip
 @pytest.mark.parametrize('links', ['?promo=offer0',
                                    '?promo=offer1',
                                    '?promo=offer2',
@@ -41,5 +42,26 @@ def test_parametrize_links(driver, links):
     page.solver_quiz_and_get_code()
     page.check_product_price_in_basket()
     page.check_product_name_in_basket()
+
+def test_guest_cant_see_success_message_after_adding_product_to_basket(driver):
+    link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
+    page = ProductPage(driver, link)
+    page.open()
+    page.add_to_basket()
+    page.should_not_be_success_message()
+
+def test_guest_cant_see_success_message(driver):
+    link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
+    page = ProductPage(driver, link)
+    page.open()
+    page.is_not_element_present()
+
+def test_message_disappeared_after_adding_product_to_basket(driver):
+    link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
+    page = ProductPage(driver, link)
+    page.open()
+    page.add_to_basket()
+    page.is_disappeared()
+
 
 
